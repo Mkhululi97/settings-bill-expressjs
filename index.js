@@ -32,9 +32,12 @@ app.use(bodyParser.json());
 
 // Create a DEFAULT GET route
 app.get("/", function (req, res) {
-  // render the html on our server
-  // res.render("index");
-  res.render("index", { updateSettings: settingsBill.getSettings() });
+  // this is where our data that is sent to the server gets retrieved and sent to
+  //    our factory function, which displays data on our app.
+  res.render("index", {
+    updateSettings: settingsBill.getSettings(),
+    totals: settingsBill.totals(),
+  });
 });
 // Create a SETTINGS POST route
 app.post("/settings", function (req, res) {
@@ -49,7 +52,13 @@ app.post("/settings", function (req, res) {
   res.redirect("/");
 });
 // Create a ACTION POST route
-app.post("/action", function (req, res) {});
+app.post("/action", function (req, res) {
+  // get the current selected radio button
+  // call the recordAction method and pass the current selected radio button
+  // console.log(req.body.actionType);
+  settingsBill.recordAction(req.body.actionType);
+  res.redirect("/");
+});
 // Create a ACTIONS GET route
 app.get("/actions", function (req, res) {});
 // Create a DYNAMIC GET route
