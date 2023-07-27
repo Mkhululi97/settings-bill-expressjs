@@ -1,4 +1,4 @@
-module.exports = function SettingsBill() {
+export default function SettingsBill() {
   let smsCost;
   let callCost;
   let warningLevel;
@@ -9,8 +9,8 @@ module.exports = function SettingsBill() {
   function setSettings(settings) {
     smsCost = Number(settings.smsCost);
     callCost = Number(settings.callCost);
-    warningLevel = Number(settings.warningLevel);
-    criticalLevel = Number(settings.criticalLevel);
+    warningLevel = settings.warningLevel;
+    criticalLevel = settings.criticalLevel;
   }
 
   function getSettings() {
@@ -116,4 +116,4 @@ module.exports = function SettingsBill() {
     hasReachedWarningLevel,
     hasReachedCriticalLevel,
   };
-};
+}

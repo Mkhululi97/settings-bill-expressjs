@@ -1,25 +1,25 @@
 // Bring in the express framework
-const express = require("express");
+import express from "express";
 // Bring in the Handlebars Middleware
-const exphbs = require("express-handlebars");
+import { engine } from "express-handlebars";
 // Bring in the Body-parser Middleware
-const bodyParser = require("body-parser");
+import bodyParser from "body-parser";
 // Bring in the Factory Function
-const SettingsBill = require("./settings-bill");
+import SettingsBill from "./settings-bill.js";
 // Create an instance of the express framework
 const app = express();
 // Create an instance of the Settings Bill Factory Function
 const settingsBill = SettingsBill();
 
 /* ^^^^^^ CONFIGURE VIEW ENGIENE FOR EXPRESS JS ^^^^^^ */
-app.engine("handlebars", exphbs.engine());
+app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
 app.set("views", "./views");
 /* ^^^^^^ CONFIGURE VIEW ENGIENE FOR EXPRESS JS ^^^^^^ */
 
-/* ^^^^^^ GET ACCESS TO OUR STATIC HTML AND CSS FILES ^^^^^^ */
+/* ^^^^^^ GET ACCESS TO OUR STATIC CSS FILES ^^^^^^ */
 app.use(express.static("public"));
-/* ^^^^^^ GET ACCESS TO OUR STATIC HTML AND CSS FILES ^^^^^^ */
+/* ^^^^^^ GET ACCESS TO OUR STATIC CSS FILES ^^^^^^ */
 
 /* ^^^^^^ USE BODY PARSER ^^^^^^ */
 // parse application/x-www-form-urlencoded
@@ -45,7 +45,7 @@ app.post("/settings", function (req, res) {
     warningLevel: req.body.warningLevel,
     criticalLevel: req.body.criticalLevel,
   });
-  // console.log(settingsBill.getSettings());
+  console.log(settingsBill.getSettings());
 
   res.redirect("/");
 });

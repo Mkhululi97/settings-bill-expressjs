@@ -1,6 +1,8 @@
-const assert = require("assert");
-
-const SettingsBill = require("../settings-bill.js");
+// const assert = require("assert");
+// const SettingsBill = require("../settings-bill.js");
+// ES Modules
+import assert from "assert";
+import SettingsBill from "../settings-bill.js";
 
 describe("settings-bill", function () {
   const settingsBill = SettingsBill();
