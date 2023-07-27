@@ -34,19 +34,18 @@ app.use(bodyParser.json());
 app.get("/", function (req, res) {
   // render the html on our server
   // res.render("index");
-  res.render("index", { settings: settingsBill.getSettings() });
+  res.render("index", { updateSettings: settingsBill.getSettings() });
 });
 // Create a SETTINGS POST route
 app.post("/settings", function (req, res) {
-  // send data enter on the form to the server with req.
+  // send data entered on the form to the server with req.
   settingsBill.setSettings({
     callCost: req.body.callCost,
     smsCost: req.body.smsCost,
     warningLevel: req.body.warningLevel,
     criticalLevel: req.body.criticalLevel,
   });
-  console.log(settingsBill.getSettings());
-
+  // go back to the root route/home page after submit button has been clicked.
   res.redirect("/");
 });
 // Create a ACTION POST route
