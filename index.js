@@ -60,9 +60,15 @@ app.post("/action", function (req, res) {
   res.redirect("/");
 });
 // Create a ACTIONS GET route
-app.get("/actions", function (req, res) {});
+app.get("/actions", function (req, res) {
+  // retrieve data about the post request that was sent to the server
+  res.render("actions", { actions: settingsBill.actions() });
+});
 // Create a DYNAMIC GET route
-app.get("/actions/:type", function (req, res) {});
+app.get("/actions/:actionType", function (req, res) {
+  const actionType = req.params.actionType;
+  res.render("actions", { actions: settingsBill.actionsFor(actionType) });
+});
 
 /* ^^^^^^ SETUP ROUTES ^^^^^^ */
 
