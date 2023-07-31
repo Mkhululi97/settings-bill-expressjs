@@ -24,16 +24,18 @@ export default function SettingsBill() {
 
   function recordAction(action) {
     let cost = 0;
-    if (action === "sms") {
+    if (action === "sms" && smsCost > 0) {
       cost = smsCost;
-    } else if (action === "call") {
+    } else if (action === "call" && callCost > 0) {
       cost = callCost;
     }
-    actionList.push({
-      type: action,
-      cost,
-      timestamp: new Date(),
-    });
+    if (callCost > 0 && smsCost > 0) {
+      actionList.push({
+        type: action,
+        cost,
+        timestamp: new Date(),
+      });
+    }
   }
 
   function actions() {
