@@ -9,8 +9,8 @@ export default function SettingsBill() {
   function setSettings(settings) {
     smsCost = Number(settings.smsCost);
     callCost = Number(settings.callCost);
-    warningLevel = settings.warningLevel;
-    criticalLevel = settings.criticalLevel;
+    warningLevel = Number(settings.warningLevel);
+    criticalLevel = Number(settings.criticalLevel);
   }
 
   function getSettings() {
@@ -29,7 +29,6 @@ export default function SettingsBill() {
     } else if (action === "call") {
       cost = callCost;
     }
-
     actionList.push({
       type: action,
       cost,

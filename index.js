@@ -4,12 +4,16 @@ import express from "express";
 import { engine } from "express-handlebars";
 // Bring in the Body-parser Middleware
 import bodyParser from "body-parser";
+// Bring in MomentJS
+import moment from "moment";
 // Bring in the Factory Function
 import SettingsBill from "./settings-bill.js";
 // Create an instance of the express framework
 const app = express();
 // Create an instance of the Settings Bill Factory Function
 const settingsBill = SettingsBill();
+// Create an instances of MomentJS
+// const moment = momentjs();
 
 /* ^^^^^^ CONFIGURE VIEW ENGIENE FOR EXPRESS JS ^^^^^^ */
 app.engine("handlebars", engine());
@@ -63,11 +67,17 @@ app.post("/action", function (req, res) {
 app.get("/actions", function (req, res) {
   // retrieve data about the post request that was sent to the server
   res.render("actions", { actions: settingsBill.actions() });
+  settingsBill.actions().forEach((result) => {
+    result.timestamp = moment(result.timestamp).fromNow();
+  });
 });
 // Create a DYNAMIC GET route
 app.get("/actions/:actionType", function (req, res) {
   const actionType = req.params.actionType;
   res.render("actions", { actions: settingsBill.actionsFor(actionType) });
+  settingsBill.actionsFor(actionType).forEach((result) => {
+    result.timestamp = moment(result.timestamp).fromNow();
+  });
 });
 
 /* ^^^^^^ SETUP ROUTES ^^^^^^ */
