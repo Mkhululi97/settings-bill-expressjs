@@ -41,11 +41,15 @@ app.get("/", function (req, res) {
   res.render("index", {
     updateSettings: settingsBill.getSettings(),
     totals: settingsBill.totals(),
+    className: settingsBill.getClassName(),
   });
 });
+
 // Create a SETTINGS POST route
 app.post("/settings", function (req, res) {
   // send data entered on the form to the server with req.
+  // this is where our data that is sent to the server gets retrieved and sent to
+  //    our factory function, which displays data on our app.
   settingsBill.setSettings({
     callCost: req.body.callCost,
     smsCost: req.body.smsCost,

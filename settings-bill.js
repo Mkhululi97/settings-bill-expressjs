@@ -3,7 +3,7 @@ export default function SettingsBill() {
   let callCost;
   let warningLevel;
   let criticalLevel;
-
+  let className;
   let actionList = [];
 
   function setSettings(settings) {
@@ -104,6 +104,12 @@ export default function SettingsBill() {
     const total = grandTotal();
     return total >= criticalLevel;
   }
+  function getClassName() {
+    // set class name either for critical level or warning level.
+    hasReachedCriticalLevel() ? (className = "danger") : (className = "");
+    hasReachedWarningLevel() ? (className = "warning") : "";
+    return className;
+  }
 
   return {
     setSettings,
@@ -114,5 +120,6 @@ export default function SettingsBill() {
     totals,
     hasReachedWarningLevel,
     hasReachedCriticalLevel,
+    getClassName,
   };
 }
