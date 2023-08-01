@@ -63,8 +63,8 @@ app.post("/settings", function (req, res) {
 app.post("/action", function (req, res) {
   // get the current selected radio button
   // call the recordAction method and pass the current selected radio button
-  // console.log(req.body.actionType);
   settingsBill.recordAction(req.body.actionType);
+
   res.redirect("/");
 });
 // Create a ACTIONS GET route
@@ -72,16 +72,13 @@ app.get("/actions", function (req, res) {
   // retrieve data about the post request that was sent to the server
   res.render("actions", { actions: settingsBill.actions() });
   settingsBill.actions().forEach((result) => {
-    result.timestamp = moment(result.timestamp).fromNow();
+    result.timestamp = moment().fromNow();
   });
 });
 // Create a DYNAMIC GET route
 app.get("/actions/:actionType", function (req, res) {
   const actionType = req.params.actionType;
   res.render("actions", { actions: settingsBill.actionsFor(actionType) });
-  settingsBill.actionsFor(actionType).forEach((result) => {
-    result.timestamp = moment(result.timestamp).fromNow();
-  });
 });
 
 /* ^^^^^^ SETUP ROUTES ^^^^^^ */

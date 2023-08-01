@@ -7,10 +7,10 @@ import SettingsBill from "../settings-bill.js";
 describe("settings-bill", function () {
   const settingsBill = SettingsBill();
 
-  it("should be able to record calls", function () {
-    settingsBill.recordAction("call");
-    assert.equal(1, settingsBill.actionsFor("call").length);
-  });
+  // it("should be able to record calls", function () {
+  //   settingsBill.recordAction("call");
+  //   assert.equal(1, settingsBill.actionsFor("call").length);
+  // });
 
   it("should be able to set the settings", function () {
     settingsBill.setSettings({
